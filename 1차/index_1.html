@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Portfolio Website</title>
+
+    <!-- Google Font: 실제 제출 시 원하는 폰트로 변경 가능 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================
+       RESET
+    ========================= */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #111;
+        color: #fff;
+        font-family: "Noto Sans KR", sans-serif;
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      :root {
+        --content-max: 1600px;
+        --content-wide: 1500px;
+        --content-mid: 1400px;
+
+        --dark: #111;
+        --gray: #3f3f3f;
+        --light-gray: #d8d8d8;
+
+        --red: #e21b24;
+        --green: #0f7f4f;
+        --yellow: #f5b323;
+        --blue: #50bfe3;
+        --point: #ffb400;
+      }
+
+      /* =========================
+       COMMON
+    ========================= */
+      .page {
+        width: 100%;
+        background: #111;
+      }
+
+      .section {
+        width: 100%;
+        position: relative;
+      }
+
+      .inner {
+        width: min(var(--content-max), calc(100% - 96px));
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .section-label {
+        color: var(--point);
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .big-title {
+        font-family: "Anton", "Noto Sans KR", sans-serif;
+        font-size: clamp(64px, 6.5vw, 132px);
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+        font-weight: 900;
+      }
+
+      .section-title {
+        font-family: "Anton", "Noto Sans KR", sans-serif;
+        font-size: clamp(52px, 5vw, 96px);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 900;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 28px;
+        padding: 16px 26px;
+        background: var(--red);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 900;
+        transition: 0.25s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        background: #ff222b;
+      }
+
+
+      .gnb {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 78px;
+        z-index: 1000;
+        background: rgba(20, 20, 20, 0.82);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .gnb-inner {
+        width: min(var(--content-max), calc(100% - 96px));
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        font-family: "Anton", sans-serif;
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+
+      .nav {
+        display: flex;
+        gap: 36px;
+        align-items: center;
+      }
+
+      .nav a {
+        font-size: 14px;
+        font-weight: 700;
+        color: #eaeaea;
+        opacity: 0.85;
+        transition: 0.25s ease;
+      }
+
+      .nav a:hover {
+        color: var(--point);
+        opacity: 1;
+      }
+
+      /* =========================
+       HERO
+    ========================= */
+      .hero {
+        min-height: 920px;
+        padding-top: 78px;
+        overflow: hidden;
+        background: #111;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 78px 0 0 0;
+        background:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.1)),
+          url("images/hero/hero-bg.jpg") center / cover no-repeat;
+        filter: grayscale(1);
+        opacity: 0.95;
+      }
+
+      .hero-red-person {
+        position: absolute;
+        right: 29%;
+        bottom: 0;
+        width: min(480px, 26vw);
+        z-index: 1;
+        filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.35));
+        animation: floatPerson 3.8s ease-in-out infinite alternate;
+      }
+
+      @keyframes floatPerson {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-12px);
+        }
+      }
+
+      .hero-content {
+        min-height: 842px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 60px;
+      }
+
+      .hero .big-title {
+        max-width: 980px;
+        text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+
+      /* =========================
+       VISUAL WORK INTRO
+    ========================= */
+      .visual-intro {
+        min-height: 760px;
+        background: #ddd;
+        overflow: hidden;
+      }
+
+      .visual-intro-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(0, 0, 0, 0.15)
+          ),
+          url("images/works/works-bg.jpg") center / cover no-repeat;
+        filter: grayscale(0.2) contrast(1.05);
+      }
+
+      .people-stage {
+        width: min(var(--content-wide), calc(100% - 120px));
+        min-height: 760px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .person {
+        position: absolute;
+        bottom: 0;
+        height: 620px;
+        object-fit: contain;
+        transition: 0.35s ease;
+        cursor: pointer;
+        filter: drop-shadow(0 18px 18px rgba(0, 0, 0, 0.22));
+      }
+
+      .person:hover {
+        transform: translateY(-24px) scale(1.04);
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+      }
+
+      .person.red {
+        left: 5%;
+        height: 540px;
+      }
+
+      .person.green {
+        left: 28%;
+        height: 600px;
+      }
+
+      .person.yellow {
+        left: 49%;
+        height: 610px;
+      }
+
+      .person.blue {
+        left: 69%;
+        height: 640px;
+      }
+
+      .exclamation {
+        position: absolute;
+        right: 5%;
+        top: 120px;
+        width: 260px;
+        animation: bounceMark 1.6s infinite alternate ease-in-out;
+      }
+
+      @keyframes bounceMark {
+        from {
+          transform: rotate(-4deg) translateY(0);
+        }
+        to {
+          transform: rotate(3deg) translateY(-14px);
+        }
+      }
+
+      .floating-card {
+        position: absolute;
+        right: 16%;
+        top: 210px;
+        width: 520px;
+        padding: 28px;
+        background: rgba(245, 245, 245, 0.94);
+        color: #111;
+        z-index: 4;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+        display: none;
+      }
+
+      .floating-card.active {
+        display: block;
+        animation: cardIn 0.35s ease forwards;
+      }
+
+      @keyframes cardIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .floating-card-top {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .dot {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .dot.red {
+        background: var(--red);
+      }
+      .dot.green {
+        background: var(--green);
+      }
+      .dot.yellow {
+        background: var(--yellow);
+      }
+      .dot.blue {
+        background: var(--blue);
+      }
+
+      .floating-card h3 {
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+      }
+
+      .floating-card p {
+        font-size: 15px;
+        line-height: 1.55;
+        color: #333;
+        margin-bottom: 18px;
+      }
+
+      .floating-thumbs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .floating-thumbs img {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        background: #ddd;
+      }
+
+      /* =========================
+       WORKS
+    ========================= */
+      .works {
+        background: #444;
+        padding: 110px 0 105px;
+      }
+
+      .works-grid {
+        margin-top: 46px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 36px;
+      }
+
+      .work-card {
+        position: relative;
+        min-height: 430px;
+        background: #d9d9d9;
+        color: #111;
+        padding: 34px;
+        overflow: hidden;
+        transition: 0.3s ease;
+        cursor: pointer;
+      }
+
+      .work-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 30px 50px rgba(0, 0, 0, 0.28);
+      }
+
+      .work-number {
+        width: 190px;
+        height: 190px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-family: "Anton", sans-serif;
+        font-size: 72px;
+        letter-spacing: -0.02em;
+        margin-bottom: 26px;
+      }
+
+      .work-number.red {
+        background: var(--red);
+      }
+      .work-number.green {
+        background: var(--green);
+      }
+      .work-number.yellow {
+        background: var(--yellow);
+      }
+      .work-number.blue {
+        background: var(--blue);
+      }
+
+      .work-card h3 {
+        font-size: 25px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        margin-bottom: 8px;
+      }
+
+      .work-card p {
+        font-size: 14px;
+        color: #444;
+        line-height: 1.5;
+      }
+
+      .work-thumb {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 46%;
+        object-fit: cover;
+        opacity: 0.18;
+        transition: 0.3s ease;
+      }
+
+      .work-card:hover .work-thumb {
+        opacity: 0.38;
+        transform: scale(1.06);
+      }
+
+      /* =========================
+       TOOLS
+    ========================= */
+      .tools {
+        min-height: 720px;
+        background: #8a8a8a;
+        overflow: hidden;
+        padding: 100px 0;
+      }
+
+      .tools .inner {
+        min-height: 520px;
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        align-items: center;
+      }
+
+      .hand-img {
+        width: 60px;
+        filter: grayscale(1) contrast(1.1);
+      }
+
+      .tools-title-wrap {
+        position: relative;
+        height: 520px;
+      }
+
+      .tools-title {
+        position: absolute;
+        top: 30px;
+        right: 0;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(56px, 5vw, 92px);
+        letter-spacing: -0.03em;
+      }
+
+      .tool-icon {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        transition: 0.3s ease;
+      }
+
+      .tool-icon:hover {
+        transform: scale(1.12) rotate(-4deg);
+      }
+
+      .figma {
+        left: 19%;
+        top: 150px;
+      }
+
+      .photoshop {
+        left: 52%;
+        top: 230px;
+      }
+
+      .illustrator {
+        left: 32%;
+        top: 380px;
+      }
+
+      /* =========================
+       ABOUT
+    ========================= */
+      .about {
+        min-height: 700px;
+        background: #222;
+        overflow: hidden;
+      }
+
+      .about-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 78%;
+        height: 100%;
+        background:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.25)),
+          url("images/about/eye-bg.jpg") center / cover no-repeat;
+        filter: grayscale(1);
+      }
+
+      .eye-detail {
+        position: absolute;
+        left: 36%;
+        top: 44%;
+        width: 280px;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        animation: blinkLight 2.8s ease-in-out infinite alternate;
+      }
+
+      @keyframes blinkLight {
+        from {
+          opacity: 0.75;
+          transform: translate(-50%, -50%) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.04);
+        }
+      }
+
+      .about-panel {
+        margin-left: auto;
+        width: 38%;
+        min-height: 700px;
+        background: rgba(55, 55, 55, 0.96);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px 70px;
+        position: relative;
+        z-index: 3;
+      }
+
+      .about-panel h2 {
+        font-size: clamp(46px, 4vw, 78px);
+        line-height: 1.16;
+        letter-spacing: -0.07em;
+        font-weight: 900;
+      }
+
+      .about-panel p {
+        margin-top: 26px;
+        font-size: 18px;
+        line-height: 1.7;
+        color: #e0e0e0;
+      }
+
+      /* =========================
+       CONTACT
+    ========================= */
+      .contact {
+        min-height: 680px;
+        background: #111;
+        overflow: hidden;
+      }
+
+      .contact-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.25)),
+          url("images/contact/contact-bg.jpg") center / cover no-repeat;
+        filter: grayscale(1);
+      }
+
+      .contact-person {
+        position: absolute;
+        right: 18%;
+        bottom: 0;
+        height: 560px;
+        z-index: 2;
+        filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.4));
+      }
+
+      .contact-content {
+        min-height: 680px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .contact h2 {
+        font-family: "Anton", sans-serif;
+        font-size: clamp(58px, 6vw, 112px);
+        letter-spacing: -0.05em;
+        line-height: 0.95;
+        max-width: 1180px;
+      }
+
+      .contact-info {
+        margin-top: 34px;
+        font-size: 18px;
+        line-height: 1.9;
+        color: #fff;
+      }
+
+      .sns-icons {
+        display: flex;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .sns-icons img {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+        opacity: 0.9;
+        transition: 0.25s ease;
+      }
+
+      .sns-icons img:hover {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+
+      /* =========================
+       MODAL
+    ========================= */
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        background: rgba(0, 0, 0, 0.78);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-box {
+        width: min(1100px, 100%);
+        max-height: 88vh;
+        overflow-y: auto;
+        background: #f2f2f2;
+        color: #111;
+        padding: 42px;
+        position: relative;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        width: 46px;
+        height: 46px;
+        background: #111;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .modal-category {
+        color: var(--red);
+        font-size: 18px;
+        font-weight: 900;
+        margin-bottom: 10px;
+      }
+
+      .modal-title {
+        font-size: 46px;
+        line-height: 1.1;
+        letter-spacing: -0.06em;
+        font-weight: 900;
+        margin-bottom: 18px;
+        padding-right: 60px;
+      }
+
+      .modal-desc {
+        font-size: 17px;
+        line-height: 1.75;
+        color: #333;
+        margin-bottom: 28px;
+      }
+
+      .modal-meta {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 8px 22px;
+        margin-bottom: 30px;
+        padding: 18px 0;
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        font-size: 15px;
+      }
+
+      .modal-meta strong {
+        font-weight: 900;
+      }
+
+      .modal-images {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .modal-images img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        background: #ccc;
+      }
+
+      /* =========================
+       RESPONSIVE
+    ========================= */
+      @media (max-width: 1200px) {
+        .works-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .about-panel {
+          width: 48%;
+        }
+
+        .person {
+          height: 520px;
+        }
+
+        .floating-card {
+          width: 460px;
+          right: 8%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .inner,
+        .gnb-inner {
+          width: calc(100% - 40px);
+        }
+
+        .gnb {
+          height: auto;
+          padding: 18px 0;
+        }
+
+        .gnb-inner {
+          flex-direction: column;
+          gap: 14px;
+          align-items: flex-start;
+        }
+
+        .nav {
+          gap: 18px;
+          flex-wrap: wrap;
+        }
+
+        .hero {
+          min-height: 760px;
+        }
+
+        .hero-content {
+          min-height: 680px;
+        }
+
+        .hero-red-person {
+          width: 260px;
+          right: 8%;
+        }
+
+        .visual-intro {
+          min-height: 620px;
+        }
+
+        .people-stage {
+          width: calc(100% - 20px);
+          min-height: 620px;
+        }
+
+        .person.red {
+          left: 0;
+          height: 360px;
+        }
+        .person.green {
+          left: 22%;
+          height: 400px;
+        }
+        .person.yellow {
+          left: 45%;
+          height: 400px;
+        }
+        .person.blue {
+          left: 65%;
+          height: 420px;
+        }
+
+        .exclamation {
+          width: 150px;
+          top: 80px;
+        }
+
+        .floating-card {
+          left: 20px;
+          right: auto;
+          width: calc(100% - 40px);
+          top: 120px;
+        }
+
+        .works-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .tools .inner {
+          grid-template-columns: 1fr;
+        }
+
+        .hand-img {
+          width: 520px;
+          filter: grayscale(1) contrast(1.1);
+          transform: translate(800px, 300px);
+        }
+
+        .tools-title-wrap {
+          height: 500px;
+        }
+
+        .about-bg {
+          width: 100%;
+          height: 52%;
+        }
+
+        .about-panel {
+          width: 100%;
+          min-height: 420px;
+          margin-left: 0;
+          padding: 420px 30px 70px;
+          background: rgba(55, 55, 55, 0.88);
+        }
+
+        .eye-detail {
+          left: 50%;
+          top: 24%;
+          width: 190px;
+        }
+
+        .contact-person {
+          right: 0;
+          height: 420px;
+          opacity: 0.85;
+        }
+
+        .modal {
+          padding: 20px;
+        }
+
+        .modal-images {
+          grid-template-columns: 1fr;
+        }
+
+        .modal-title {
+          font-size: 34px;
+        }
+
+        .modal-meta {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <!-- GNB -->
+      <header class="gnb">
+        <div class="gnb-inner">
+          <a href="#home" class="logo">PORTFOLIO</a>
+
+          <nav class="nav">
+            <a href="#home">Home</a>
+            <a href="#works">Works</a>
+            <a href="#tools">Tools</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <section class="section hero" id="home">
+        <div class="hero-bg"></div>
+
+        <img
+          src="images/hero/hero-red-person.png"
+          alt="빨간색 강조 인물 실루엣"
+          class="hero-red-person"
+        />
+
+        <div class="inner hero-content">
+          <p class="section-label">INTERACTIVE PORTFOLIO WEBSITE</p>
+          <h1 class="big-title">
+            Observe the Crowd,<br />
+            Find the Work.
+          </h1>
+          <a href="#works" class="btn-primary">작품 탐색하기</a>
+        </div>
+      </section>
+
+      <!-- VISUAL INTRO -->
+      <section class="section visual-intro">
+        <div class="visual-intro-bg"></div>
+
+        <div class="people-stage">
+          <img
+            src="images/works/person-red.png"
+            alt="Graphic Poster Design"
+            class="person red"
+            data-card="0"
+          />
+          <img
+            src="images/works/person-green.png"
+            alt="Branding Package"
+            class="person green"
+            data-card="1"
+          />
+          <img
+            src="images/works/person-yellow.png"
+            alt="Typography"
+            class="person yellow"
+            data-card="2"
+          />
+          <img
+            src="images/works/person-blue.png"
+            alt="Web UI Design"
+            class="person blue"
+            data-card="3"
+          />
+
+          <img
+            src="images/works/exclamation.svg"
+            alt="느낌표 그래픽"
+            class="exclamation"
+          />
+
+          <div class="floating-card active" id="floatingCard">
+            <div class="floating-card-top">
+              <span class="dot red" id="floatingDot"></span>
+              <h3 id="floatingTitle">Graphic / Poster Design</h3>
+            </div>
+            <p id="floatingText">
+              강렬한 시각 언어로 메시지를 전달하는 포스터 및 그래픽 디자인
+              작업을 확인해보세요.
+            </p>
+
+            <div class="floating-thumbs">
+              <img
+                id="floatingImg1"
+                src="images/works/work01-detail-01.jpg"
+                alt=""
+              />
+              <img
+                id="floatingImg2"
+                src="images/works/work01-detail-02.jpg"
+                alt=""
+              />
+              <img
+                id="floatingImg3"
+                src="images/works/work01-detail-03.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WORKS -->
+      <section class="section works" id="works">
+        <div class="inner">
+          <h2 class="section-title">WORKS LIST</h2>
+
+          <div class="works-grid">
+            <article class="work-card" data-work="0">
+              <div class="work-number red">01</div>
+              <h3>Graphic / Poster Design</h3>
+              <p>시각적 메시지를 중심으로 구성한 포스터 디자인 작업입니다.</p>
+              <img
+                src="images/works/work01-thumb.jpg"
+                alt=""
+                class="work-thumb"
+              />
+            </article>
+
+            <article class="work-card" data-work="1">
+              <div class="work-number green">02</div>
+              <h3>Branding / Package</h3>
+              <p>브랜드 이미지와 패키지 구조를 함께 설계한 작업입니다.</p>
+              <img
+                src="images/works/work02-thumb.jpg"
+                alt=""
+                class="work-thumb"
+              />
+            </article>
+
+            <article class="work-card" data-work="2">
+              <div class="work-number yellow">03</div>
+              <h3>Typography</h3>
+              <p>
+                텍스트의 의미를 형태와 구조로 시각화한 타이포그래픽 작업입니다.
+              </p>
+              <img
+                src="images/works/work03-thumb.jpg"
+                alt=""
+                class="work-thumb"
+              />
+            </article>
+
+            <article class="work-card" data-work="3">
+              <div class="work-number blue">04</div>
+              <h3>Web / UI Design</h3>
+              <p>사용자 흐름과 정보 구조를 고려한 웹·UI 디자인 작업입니다.</p>
+              <img
+                src="images/works/work04-thumb.jpg"
+                alt=""
+                class="work-thumb"
+              />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOOLS -->
+      <section class="section tools" id="tools">
+        <div class="inner">
+          <div>
+            <img
+              src="images/tools/hand.png"
+              alt="손 제스처 이미지"
+              class="hand-img"
+            />
+          </div>
+
+          <div class="tools-title-wrap">
+            <h2 class="tools-title">TOOLS</h2>
+
+            <img
+              src="images/tools/figma.svg"
+              alt="Figma"
+              class="tool-icon figma"
+            />
+            <img
+              src="images/tools/photoshop.svg"
+              alt="Photoshop"
+              class="tool-icon photoshop"
+            />
+            <img
+              src="images/tools/illustrator.svg"
+              alt="Illustrator"
+              class="tool-icon illustrator"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="section about" id="about">
+        <div class="about-bg"></div>
+        <img
+          src="images/about/eye-detail.png"
+          alt="눈동자 속 전구 그래픽"
+          class="eye-detail"
+        />
+
+        <div class="about-panel">
+          <p class="section-label">ABOUT ME</p>
+          <h2>
+            관찰한 것을<br />
+            디자인으로<br />
+            구조화합니다.
+          </h2>
+          <p>
+            주변의 장면과 문제를 관찰하고, 그 안에서 필요한 메시지를 찾아
+            시각적으로 정리하는 디자이너를 지향합니다.
+          </p>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section contact" id="contact">
+        <div class="contact-bg"></div>
+        <img
+          src="images/contact/contact-blue-person.png"
+          alt="파란색 인물 실루엣"
+          class="contact-person"
+        />
+
+        <div class="inner contact-content">
+          <p class="section-label">CONTACT</p>
+          <h2>Let’s make a visual message.</h2>
+
+          <div class="contact-info">
+            <p>Email. jiyeong260311@gmail.com</p>
+            <p>Instagram / Behance / Portfolio</p>
+          </div>
+
+          <div class="sns-icons">
+            <img src="images/contact/instagram.svg" alt="Instagram" />
+            <img src="images/contact/behance.svg" alt="Behance" />
+            <img src="images/contact/mail.svg" alt="Mail" />
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal" id="workModal">
+      <div class="modal-box">
+        <button class="modal-close" id="modalClose">×</button>
+
+        <p class="modal-category" id="modalCategory">CATEGORY</p>
+        <h2 class="modal-title" id="modalTitle">작품 제목</h2>
+        <p class="modal-desc" id="modalDesc">작품 설명이 들어갑니다.</p>
+
+        <div class="modal-meta">
+          <strong>YEAR</strong>
+          <span id="modalYear">2026</span>
+
+          <strong>TOOLS</strong>
+          <span id="modalTools">Figma, Photoshop, Illustrator</span>
+
+          <strong>KEYWORD</strong>
+          <span id="modalKeyword">Observation, Message, Structure</span>
+        </div>
+
+        <div class="modal-images">
+          <img id="modalImg1" src="" alt="작품 상세 이미지 1" />
+          <img id="modalImg2" src="" alt="작품 상세 이미지 2" />
+          <img id="modalImg3" src="" alt="작품 상세 이미지 3" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* =========================
+       WORK DATA
+    ========================= */
+      const works = [
+        {
+          category: "Graphic / Poster Design",
+          title: "개인작품 1번째",
+          desc: "강렬한 시각 언어와 대비를 활용해 메시지를 명확하게 전달하는 포스터 디자인 작업입니다. 색, 이미지, 타이포그래피의 충돌을 통해 시선을 유도하는 것을 목표로 했습니다.",
+          year: "2026",
+          tools: "Photoshop, Illustrator",
+          keyword: "Poster, Contrast, Message",
+          color: "red",
+          images: [
+            "images/works/work01-detail-01.jpg",
+            "images/works/work01-detail-02.jpg",
+            "images/works/work01-detail-03.jpg",
+          ],
+        },
+        {
+          category: "Branding / Package",
+          title: "개인작품 2번째",
+          desc: "브랜드의 인상과 제품 경험을 연결하기 위한 패키지 디자인 작업입니다. 형태, 색상, 정보 배치가 하나의 브랜드 이미지로 보이도록 구성했습니다.",
+          year: "2026",
+          tools: "Figma, Photoshop, Illustrator",
+          keyword: "Branding, Package, Identity",
+          color: "green",
+          images: [
+            "images/works/work02-detail-01.jpg",
+            "images/works/work02-detail-02.jpg",
+            "images/works/work02-detail-03.jpg",
+          ],
+        },
+        {
+          category: "Typography",
+          title: "개인작품 3번째",
+          desc: "텍스트를 단순히 읽는 요소가 아니라 의미를 가진 그래픽으로 확장한 타이포그래픽 작업입니다. 글자의 형태를 변형하고 구조화해 주제를 시각적으로 전달했습니다.",
+          year: "2026",
+          tools: "Illustrator, Photoshop",
+          keyword: "Typography, Type Graphic, Form",
+          color: "yellow",
+          images: [
+            "images/works/work03-detail-01.jpg",
+            "images/works/work03-detail-02.jpg",
+            "images/works/work03-detail-03.jpg",
+          ],
+        },
+        {
+          category: "Web / UI Design",
+          title: "개인작품 4번째",
+          desc: "사용자의 이동 흐름과 콘텐츠 구조를 고려한 웹·UI 디자인 작업입니다. 정보의 위계, 인터랙션, 시각적 리듬을 중심으로 화면을 설계했습니다.",
+          year: "2026",
+          tools: "Figma, HTML, CSS",
+          keyword: "Web, UI, Interaction",
+          color: "blue",
+          images: [
+            "images/works/work04-detail-01.jpg",
+            "images/works/work04-detail-02.jpg",
+            "images/works/work04-detail-03.jpg",
+          ],
+        },
+      ];
+
+      /* =========================
+       FLOATING CARD INTERACTION
+    ========================= */
+      const people = document.querySelectorAll(".person");
+      const floatingCard = document.getElementById("floatingCard");
+      const floatingDot = document.getElementById("floatingDot");
+      const floatingTitle = document.getElementById("floatingTitle");
+      const floatingText = document.getElementById("floatingText");
+      const floatingImg1 = document.getElementById("floatingImg1");
+      const floatingImg2 = document.getElementById("floatingImg2");
+      const floatingImg3 = document.getElementById("floatingImg3");
+
+      people.forEach((person) => {
+        person.addEventListener("mouseenter", () => {
+          const index = Number(person.dataset.card);
+          const work = works[index];
+
+          floatingCard.classList.remove("active");
+
+          setTimeout(() => {
+            floatingDot.className = `dot ${work.color}`;
+            floatingTitle.textContent = work.category;
+            floatingText.textContent = work.desc;
+            floatingImg1.src = work.images[0];
+            floatingImg2.src = work.images[1];
+            floatingImg3.src = work.images[2];
+
+            floatingCard.classList.add("active");
+          }, 80);
+        });
+
+        person.addEventListener("click", () => {
+          const index = Number(person.dataset.card);
+          openModal(index);
+        });
+      });
+
+      /* =========================
+       WORK MODAL
+    ========================= */
+      const workCards = document.querySelectorAll(".work-card");
+      const modal = document.getElementById("workModal");
+      const modalClose = document.getElementById("modalClose");
+
+      const modalCategory = document.getElementById("modalCategory");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDesc = document.getElementById("modalDesc");
+      const modalYear = document.getElementById("modalYear");
+      const modalTools = document.getElementById("modalTools");
+      const modalKeyword = document.getElementById("modalKeyword");
+
+      const modalImg1 = document.getElementById("modalImg1");
+      const modalImg2 = document.getElementById("modalImg2");
+      const modalImg3 = document.getElementById("modalImg3");
+
+      function openModal(index) {
+        const work = works[index];
+
+        modalCategory.textContent = work.category;
+        modalTitle.textContent = work.title;
+        modalDesc.textContent = work.desc;
+        modalYear.textContent = work.year;
+        modalTools.textContent = work.tools;
+        modalKeyword.textContent = work.keyword;
+
+        modalImg1.src = work.images[0];
+        modalImg2.src = work.images[1];
+        modalImg3.src = work.images[2];
+
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      workCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const index = Number(card.dataset.work);
+          openModal(index);
+        });
+      });
+
+      modalClose.addEventListener("click", closeModal);
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+        }
+      });
+
+      /* =========================
+       GNB SCROLL EFFECT
+    ========================= */
+      const gnb = document.querySelector(".gnb");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 80) {
+          gnb.style.background = "rgba(15, 15, 15, 0.94)";
+        } else {
+          gnb.style.background = "rgba(20, 20, 20, 0.82)";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -295,7 +295,7 @@
 
       .exclamation {
         position: absolute;
-        right: 5%;
+        right: -5%;
         top: 120px;
         width: 260px;
         animation: bounceMark 1.6s infinite alternate ease-in-out;
@@ -321,7 +321,7 @@
         z-index: 4;
         box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
         display: none;
-        cursor: pointer;
+        pointer-events: none;
       }
 
       .floating-card.active {
@@ -476,23 +476,43 @@
         background: #8a8a8a;
         overflow: hidden;
         padding: 100px 0;
+        position: relative;
       }
 
       .tools .inner {
         min-height: 520px;
-        display: grid;
-        grid-template-columns: 0.9fr 1.1fr;
-        align-items: center;
+        position: relative;
+        display: block;
+      }
+
+      /*
+        손 이미지 크기/위치는 여기서 조정합니다.
+        width: 손 크기
+        left: 좌우 위치
+        top: 위아래 위치
+      */
+      .hand-wrap {
+        position: absolute;
+        left: -60px;
+        top: 50%;
+        width: 760px;
+        transform: translateY(-50%);
+        z-index: 1;
       }
 
       .hand-img {
-        width: 460px;
+        width: 100%;
+        max-width: none;
+        height: auto;
         filter: grayscale(1) contrast(1.1);
       }
 
       .tools-title-wrap {
         position: relative;
+        width: 58%;
         height: 520px;
+        margin-left: auto;
+        z-index: 2;
       }
 
       .tools-title {
@@ -667,6 +687,39 @@
       .sns-icons img:hover {
         transform: translateY(-5px);
         opacity: 1;
+      }
+
+      /* =========================
+         BACK TO TOP BUTTON
+      ========================= */
+      .top-button {
+        position: fixed;
+        right: 32px;
+        bottom: 32px;
+        width: 62px;
+        height: 62px;
+        z-index: 1500;
+        border-radius: 50%;
+        background: var(--red);
+        color: #fff;
+        font-family: "Anton", "Noto Sans KR", sans-serif;
+        font-size: 24px;
+        font-weight: 900;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+        transition: 0.25s ease;
+      }
+
+      .top-button:hover {
+        transform: translateY(-6px);
+        background: #ff222b;
+      }
+
+      .top-button span {
+        transform: translateY(-2px);
       }
 
       /* =========================
@@ -882,15 +935,21 @@
         }
 
         .tools .inner {
-          grid-template-columns: 1fr;
+          min-height: 620px;
         }
 
-        .hand-img {
-          width: 300px;
+        .hand-wrap {
+          left: -50px;
+          top: 70px;
+          width: 430px;
+          transform: none;
         }
 
         .tools-title-wrap {
+          width: 100%;
           height: 500px;
+          margin-left: 0;
+          padding-top: 280px;
         }
 
         .about-bg {
@@ -916,6 +975,14 @@
           right: 0;
           height: 420px;
           opacity: 0.85;
+        }
+
+        .top-button {
+          right: 20px;
+          bottom: 20px;
+          width: 52px;
+          height: 52px;
+          font-size: 20px;
         }
 
         .modal {
@@ -1017,7 +1084,7 @@
             class="exclamation"
           />
 
-          <div class="floating-card active" id="floatingCard">
+          <div class="floating-card" id="floatingCard">
             <div class="floating-card-top">
               <span class="dot red" id="floatingDot"></span>
               <h3 id="floatingTitle">Graphic / Poster Design</h3>
@@ -1108,7 +1175,7 @@
       <!-- TOOLS -->
       <section class="section tools" id="tools">
         <div class="inner">
-          <div>
+          <div class="hand-wrap">
             <img
               src="images/tools/hand.png"
               alt="손 제스처 이미지"
@@ -1183,7 +1250,6 @@
 
           <div class="contact-info">
             <p>Email. jiyeong260311@gmail.com</p>
-            <p>Instagram / Behance / Portfolio</p>
           </div>
 
           <div class="sns-icons">
@@ -1193,6 +1259,11 @@
           </div>
         </div>
       </section>
+      <!-- TOP BUTTON -->
+      <button class="top-button" id="topButton" type="button" aria-label="맨 위로 이동">
+        <span>↑</span>
+      </button>
+
     </div>
 
     <!-- MODAL -->
@@ -1338,14 +1409,14 @@
           updateFloatingCard(index);
         });
 
+        person.addEventListener("mouseleave", () => {
+          floatingCard.classList.remove("active");
+        });
+
         person.addEventListener("click", () => {
           const index = Number(person.dataset.card);
           openModal(index);
         });
-      });
-
-      floatingCard.addEventListener("click", () => {
-        openModal(currentFloatingIndex);
       });
 
       /* =========================
@@ -1400,6 +1471,18 @@
         if (e.key === "Escape") {
           closeModal();
         }
+      });
+
+      /* =========================
+         BACK TO TOP BUTTON
+      ========================= */
+      const topButton = document.getElementById("topButton");
+
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       });
 
       /* =========================
