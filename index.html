@@ -495,7 +495,7 @@
         position: absolute;
         left: -60px;
         top: 50%;
-        width: 760px;
+        width: 560px;
         transform: translateY(-50%);
         z-index: 1;
       }
@@ -564,12 +564,12 @@
         position: absolute;
         left: 0;
         top: 0;
-        width: 78%;
+        width: 100%;
         height: 100%;
         background:
-          linear-gradient(90deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.25)),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.22)),
           url("images/about/eye-bg.jpg") center / cover no-repeat;
-        filter: grayscale(1);
+        filter: none;
       }
 
       .eye-detail {
@@ -595,15 +595,20 @@
 
       .about-panel {
         margin-left: auto;
-        width: 38%;
+        width: 42%;
         min-height: 700px;
-        background: rgba(55, 55, 55, 0.96);
+        background: transparent;
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding: 80px 70px;
         position: relative;
         z-index: 3;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+      }
+
+      .about-panel .section-label {
+        color: var(--point);
       }
 
       .about-panel h2 {
@@ -617,7 +622,7 @@
         margin-top: 26px;
         font-size: 18px;
         line-height: 1.7;
-        color: #e0e0e0;
+        color: #f2f2f2;
       }
 
       /* =========================
@@ -904,6 +909,7 @@
         }
 
         .exclamation {
+          
           width: 150px;
           top: 80px;
         }
@@ -954,15 +960,15 @@
 
         .about-bg {
           width: 100%;
-          height: 52%;
+          height: 100%;
         }
 
         .about-panel {
           width: 100%;
-          min-height: 420px;
+          min-height: 620px;
           margin-left: 0;
-          padding: 420px 30px 70px;
-          background: rgba(55, 55, 55, 0.88);
+          padding: 360px 30px 70px;
+          background: transparent;
         }
 
         .eye-detail {
