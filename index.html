@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive Portfolio Website</title>
 
-    <!-- Google Font: 실제 제출 시 원하는 폰트로 변경 가능 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,8 +14,8 @@
 
     <style>
       /* =========================
-       RESET
-    ========================= */
+         RESET
+      ========================= */
       * {
         margin: 0;
         padding: 0;
@@ -67,8 +66,8 @@
       }
 
       /* =========================
-       COMMON
-    ========================= */
+         COMMON
+      ========================= */
       .page {
         width: 100%;
         background: #111;
@@ -129,7 +128,9 @@
         background: #ff222b;
       }
 
-
+      /* =========================
+         GNB
+      ========================= */
       .gnb {
         position: fixed;
         top: 0;
@@ -179,8 +180,8 @@
       }
 
       /* =========================
-       HERO
-    ========================= */
+         HERO
+      ========================= */
       .hero {
         min-height: 920px;
         padding-top: 78px;
@@ -232,8 +233,8 @@
       }
 
       /* =========================
-       VISUAL WORK INTRO
-    ========================= */
+         VISUAL WORK INTRO
+      ========================= */
       .visual-intro {
         min-height: 760px;
         background: #ddd;
@@ -324,6 +325,7 @@
         z-index: 4;
         box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
         display: none;
+        cursor: pointer;
       }
 
       .floating-card.active {
@@ -359,12 +361,15 @@
       .dot.red {
         background: var(--red);
       }
+
       .dot.green {
         background: var(--green);
       }
+
       .dot.yellow {
         background: var(--yellow);
       }
+
       .dot.blue {
         background: var(--blue);
       }
@@ -394,95 +399,82 @@
         background: #ddd;
       }
 
+      .floating-thumbs img.is-empty,
+      .modal-images img.is-empty {
+        visibility: hidden;
+      }
+
       /* =========================
-       WORKS
-    ========================= */
+         WORKS - ARTWORK IMAGES ONLY
+      ========================= */
       .works {
         background: #444;
         padding: 110px 0 105px;
-      }
-
-      .works-grid {
-        margin-top: 46px;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 36px;
-      }
-
-      .work-card {
-        position: relative;
-        min-height: 430px;
-        background: #d9d9d9;
-        color: #111;
-        padding: 34px;
         overflow: hidden;
-        transition: 0.3s ease;
-        cursor: pointer;
       }
 
-      .work-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 30px 50px rgba(0, 0, 0, 0.28);
-      }
-
-      .work-number {
-        width: 190px;
-        height: 190px;
+      .works-head {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        font-family: "Anton", sans-serif;
-        font-size: 72px;
-        letter-spacing: -0.02em;
-        margin-bottom: 26px;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
       }
 
-      .work-number.red {
-        background: var(--red);
-      }
-      .work-number.green {
-        background: var(--green);
-      }
-      .work-number.yellow {
-        background: var(--yellow);
-      }
-      .work-number.blue {
-        background: var(--blue);
+      .works-guide {
+        font-size: 15px;
+        color: #e5e5e5;
+        opacity: 0.85;
       }
 
-      .work-card h3 {
-        font-size: 25px;
-        font-weight: 900;
-        letter-spacing: -0.04em;
-        margin-bottom: 8px;
-      }
-
-      .work-card p {
-        font-size: 14px;
-        color: #444;
-        line-height: 1.5;
-      }
-
-      .work-thumb {
-        position: absolute;
-        right: 0;
-        bottom: 0;
+      .works-scroll {
+        margin-top: 46px;
         width: 100%;
-        height: 46%;
-        object-fit: cover;
-        opacity: 0.18;
-        transition: 0.3s ease;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 30px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
       }
 
-      .work-card:hover .work-thumb {
-        opacity: 0.38;
-        transform: scale(1.06);
+      .works-scroll::-webkit-scrollbar {
+        height: 12px;
+      }
+
+      .works-scroll::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .works-scroll::-webkit-scrollbar-thumb {
+        background: #fff;
+      }
+
+      .artwork-list {
+        display: flex;
+        gap: 32px;
+        width: max-content;
+        padding-right: 80px;
+      }
+
+      .artwork-item {
+        flex: 0 0 auto;
+        width: 520px;
+        height: 680px;
+        background: #222;
+        overflow: hidden;
+        scroll-snap-align: start;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+      }
+
+      .artwork-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #222;
       }
 
       /* =========================
-       TOOLS
-    ========================= */
+         TOOLS
+      ========================= */
       .tools {
         min-height: 720px;
         background: #8a8a8a;
@@ -544,8 +536,8 @@
       }
 
       /* =========================
-       ABOUT
-    ========================= */
+         ABOUT
+      ========================= */
       .about {
         min-height: 700px;
         background: #222;
@@ -613,8 +605,8 @@
       }
 
       /* =========================
-       CONTACT
-    ========================= */
+         CONTACT
+      ========================= */
       .contact {
         min-height: 680px;
         background: #111;
@@ -682,8 +674,8 @@
       }
 
       /* =========================
-       MODAL
-    ========================= */
+         MODAL
+      ========================= */
       .modal {
         position: fixed;
         inset: 0;
@@ -769,18 +761,14 @@
       .modal-images img {
         width: 100%;
         aspect-ratio: 1 / 1;
-        object-fit: cover;
+        object-fit: contain;
         background: #ccc;
       }
 
       /* =========================
-       RESPONSIVE
-    ========================= */
+         RESPONSIVE
+      ========================= */
       @media (max-width: 1200px) {
-        .works-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
         .about-panel {
           width: 48%;
         }
@@ -792,6 +780,11 @@
         .floating-card {
           width: 460px;
           right: 8%;
+        }
+
+        .artwork-item {
+          width: 460px;
+          height: 620px;
         }
       }
 
@@ -843,14 +836,17 @@
           left: 0;
           height: 360px;
         }
+
         .person.green {
           left: 22%;
           height: 400px;
         }
+
         .person.yellow {
           left: 45%;
           height: 400px;
         }
+
         .person.blue {
           left: 65%;
           height: 420px;
@@ -868,8 +864,23 @@
           top: 120px;
         }
 
-        .works-grid {
-          grid-template-columns: 1fr;
+        .works-head {
+          display: block;
+        }
+
+        .works-guide {
+          margin-top: 12px;
+          font-size: 13px;
+        }
+
+        .artwork-list {
+          gap: 20px;
+          padding-right: 40px;
+        }
+
+        .artwork-item {
+          width: 300px;
+          height: 420px;
         }
 
         .tools .inner {
@@ -976,18 +987,21 @@
             class="person red"
             data-card="0"
           />
+
           <img
             src="images/works/person-green.png"
             alt="Branding Package"
             class="person green"
             data-card="1"
           />
+
           <img
             src="images/works/person-yellow.png"
             alt="Typography"
             class="person yellow"
             data-card="2"
           />
+
           <img
             src="images/works/person-blue.png"
             alt="Web UI Design"
@@ -1006,26 +1020,27 @@
               <span class="dot red" id="floatingDot"></span>
               <h3 id="floatingTitle">Graphic / Poster Design</h3>
             </div>
+
             <p id="floatingText">
-              강렬한 시각 언어로 메시지를 전달하는 포스터 및 그래픽 디자인
-              작업을 확인해보세요.
+              강렬한 시각 언어와 대비를 활용해 메시지를 명확하게 전달하는 포스터 디자인 작업입니다.
+              색, 이미지, 타이포그래피의 충돌을 통해 시선을 유도하는 것을 목표로 했습니다.
             </p>
 
             <div class="floating-thumbs">
               <img
                 id="floatingImg1"
                 src="images/works/work01-detail-01.jpg"
-                alt=""
+                alt="작품 미리보기 1"
               />
               <img
                 id="floatingImg2"
-                src="images/works/work01-detail-02.jpg"
-                alt=""
+                class="is-empty"
+                alt="빈 작품 미리보기 2"
               />
               <img
                 id="floatingImg3"
-                src="images/works/work01-detail-03.jpg"
-                alt=""
+                class="is-empty"
+                alt="빈 작품 미리보기 3"
               />
             </div>
           </div>
@@ -1035,54 +1050,55 @@
       <!-- WORKS -->
       <section class="section works" id="works">
         <div class="inner">
-          <h2 class="section-title">WORKS LIST</h2>
+          <div class="works-head">
+            <h2 class="section-title">WORKS LIST</h2>
+            <p class="works-guide">
+              작품 이미지를 좌우로 스크롤해서 볼 수 있습니다.
+            </p>
+          </div>
 
-          <div class="works-grid">
-            <article class="work-card" data-work="0">
-              <div class="work-number red">01</div>
-              <h3>Graphic / Poster Design</h3>
-              <p>시각적 메시지를 중심으로 구성한 포스터 디자인 작업입니다.</p>
-              <img
-                src="images/works/work01-thumb.jpg"
-                alt=""
-                class="work-thumb"
-              />
-            </article>
+          <div class="works-scroll">
+            <div class="artwork-list">
+              <div class="artwork-item">
+                <img src="images/works/work01-detail-01.jpg" alt="작품 이미지 01" />
+              </div>
 
-            <article class="work-card" data-work="1">
-              <div class="work-number green">02</div>
-              <h3>Branding / Package</h3>
-              <p>브랜드 이미지와 패키지 구조를 함께 설계한 작업입니다.</p>
-              <img
-                src="images/works/work02-thumb.jpg"
-                alt=""
-                class="work-thumb"
-              />
-            </article>
+              <div class="artwork-item">
+                <img src="images/works/work02-detail-01.jpg" alt="작품 이미지 02" />
+              </div>
 
-            <article class="work-card" data-work="2">
-              <div class="work-number yellow">03</div>
-              <h3>Typography</h3>
-              <p>
-                텍스트의 의미를 형태와 구조로 시각화한 타이포그래픽 작업입니다.
-              </p>
-              <img
-                src="images/works/work03-thumb.jpg"
-                alt=""
-                class="work-thumb"
-              />
-            </article>
+              <div class="artwork-item">
+                <img src="images/works/work02-detail-02.jpg" alt="작품 이미지 03" />
+              </div>
 
-            <article class="work-card" data-work="3">
-              <div class="work-number blue">04</div>
-              <h3>Web / UI Design</h3>
-              <p>사용자 흐름과 정보 구조를 고려한 웹·UI 디자인 작업입니다.</p>
-              <img
-                src="images/works/work04-thumb.jpg"
-                alt=""
-                class="work-thumb"
-              />
-            </article>
+              <div class="artwork-item">
+                <img src="images/works/work02-detail-03.jpg" alt="작품 이미지 04" />
+              </div>
+
+              <div class="artwork-item">
+                <img src="images/works/work03-detail-01.jpg" alt="작품 이미지 05" />
+              </div>
+
+              <div class="artwork-item">
+                <img src="images/works/work03-detail-02.jpg" alt="작품 이미지 06" />
+              </div>
+
+              <div class="artwork-item">
+                <img src="images/works/work03-detail-03.jpg" alt="작품 이미지 07" />
+              </div>
+
+              <div class="artwork-item">
+                <img src="images/works/work04-detail-01.jpg" alt="작품 이미지 08" />
+              </div>
+
+              <div class="artwork-item">
+                <img src="images/works/work04-detail-02.jpg" alt="작품 이미지 09" />
+              </div>
+
+              <div class="artwork-item">
+                <img src="images/works/work04-detail-03.jpg" alt="작품 이미지 10" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1106,11 +1122,13 @@
               alt="Figma"
               class="tool-icon figma"
             />
+
             <img
               src="images/tools/photoshop.svg"
               alt="Photoshop"
               class="tool-icon photoshop"
             />
+
             <img
               src="images/tools/illustrator.svg"
               alt="Illustrator"
@@ -1123,6 +1141,7 @@
       <!-- ABOUT -->
       <section class="section about" id="about">
         <div class="about-bg"></div>
+
         <img
           src="images/about/eye-detail.png"
           alt="눈동자 속 전구 그래픽"
@@ -1131,11 +1150,13 @@
 
         <div class="about-panel">
           <p class="section-label">ABOUT ME</p>
+
           <h2>
             관찰한 것을<br />
             디자인으로<br />
             구조화합니다.
           </h2>
+
           <p>
             주변의 장면과 문제를 관찰하고, 그 안에서 필요한 메시지를 찾아
             시각적으로 정리하는 디자이너를 지향합니다.
@@ -1146,6 +1167,7 @@
       <!-- CONTACT -->
       <section class="section contact" id="contact">
         <div class="contact-bg"></div>
+
         <img
           src="images/contact/contact-blue-person.png"
           alt="파란색 인물 실루엣"
@@ -1154,6 +1176,7 @@
 
         <div class="inner contact-content">
           <p class="section-label">CONTACT</p>
+
           <h2>Let’s make a visual message.</h2>
 
           <div class="contact-info">
@@ -1192,16 +1215,16 @@
 
         <div class="modal-images">
           <img id="modalImg1" src="" alt="작품 상세 이미지 1" />
-          <img id="modalImg2" src="" alt="작품 상세 이미지 2" />
-          <img id="modalImg3" src="" alt="작품 상세 이미지 3" />
+          <img id="modalImg2" class="is-empty" alt="작품 상세 이미지 2" />
+          <img id="modalImg3" class="is-empty" alt="작품 상세 이미지 3" />
         </div>
       </div>
     </div>
 
     <script>
       /* =========================
-       WORK DATA
-    ========================= */
+         WORK DATA
+      ========================= */
       const works = [
         {
           category: "Graphic / Poster Design",
@@ -1213,8 +1236,8 @@
           color: "red",
           images: [
             "images/works/work01-detail-01.jpg",
-            "images/works/work01-detail-02.jpg",
-            "images/works/work01-detail-03.jpg",
+            "",
+            "",
           ],
         },
         {
@@ -1262,8 +1285,21 @@
       ];
 
       /* =========================
-       FLOATING CARD INTERACTION
-    ========================= */
+         IMAGE SETTING FUNCTION
+      ========================= */
+      function setImage(imgElement, src) {
+        if (src) {
+          imgElement.src = src;
+          imgElement.classList.remove("is-empty");
+        } else {
+          imgElement.removeAttribute("src");
+          imgElement.classList.add("is-empty");
+        }
+      }
+
+      /* =========================
+         FLOATING CARD INTERACTION
+      ========================= */
       const people = document.querySelectorAll(".person");
       const floatingCard = document.getElementById("floatingCard");
       const floatingDot = document.getElementById("floatingDot");
@@ -1273,23 +1309,31 @@
       const floatingImg2 = document.getElementById("floatingImg2");
       const floatingImg3 = document.getElementById("floatingImg3");
 
+      let currentFloatingIndex = 0;
+
+      function updateFloatingCard(index) {
+        const work = works[index];
+        currentFloatingIndex = index;
+
+        floatingCard.classList.remove("active");
+
+        setTimeout(() => {
+          floatingDot.className = `dot ${work.color}`;
+          floatingTitle.textContent = work.category;
+          floatingText.textContent = work.desc;
+
+          setImage(floatingImg1, work.images[0]);
+          setImage(floatingImg2, work.images[1]);
+          setImage(floatingImg3, work.images[2]);
+
+          floatingCard.classList.add("active");
+        }, 80);
+      }
+
       people.forEach((person) => {
         person.addEventListener("mouseenter", () => {
           const index = Number(person.dataset.card);
-          const work = works[index];
-
-          floatingCard.classList.remove("active");
-
-          setTimeout(() => {
-            floatingDot.className = `dot ${work.color}`;
-            floatingTitle.textContent = work.category;
-            floatingText.textContent = work.desc;
-            floatingImg1.src = work.images[0];
-            floatingImg2.src = work.images[1];
-            floatingImg3.src = work.images[2];
-
-            floatingCard.classList.add("active");
-          }, 80);
+          updateFloatingCard(index);
         });
 
         person.addEventListener("click", () => {
@@ -1298,10 +1342,13 @@
         });
       });
 
+      floatingCard.addEventListener("click", () => {
+        openModal(currentFloatingIndex);
+      });
+
       /* =========================
-       WORK MODAL
-    ========================= */
-      const workCards = document.querySelectorAll(".work-card");
+         MODAL
+      ========================= */
       const modal = document.getElementById("workModal");
       const modalClose = document.getElementById("modalClose");
 
@@ -1326,9 +1373,9 @@
         modalTools.textContent = work.tools;
         modalKeyword.textContent = work.keyword;
 
-        modalImg1.src = work.images[0];
-        modalImg2.src = work.images[1];
-        modalImg3.src = work.images[2];
+        setImage(modalImg1, work.images[0]);
+        setImage(modalImg2, work.images[1]);
+        setImage(modalImg3, work.images[2]);
 
         modal.classList.add("active");
         document.body.style.overflow = "hidden";
@@ -1338,13 +1385,6 @@
         modal.classList.remove("active");
         document.body.style.overflow = "";
       }
-
-      workCards.forEach((card) => {
-        card.addEventListener("click", () => {
-          const index = Number(card.dataset.work);
-          openModal(index);
-        });
-      });
 
       modalClose.addEventListener("click", closeModal);
 
@@ -1361,8 +1401,8 @@
       });
 
       /* =========================
-       GNB SCROLL EFFECT
-    ========================= */
+         GNB SCROLL EFFECT
+      ========================= */
       const gnb = document.querySelector(".gnb");
 
       window.addEventListener("scroll", () => {
