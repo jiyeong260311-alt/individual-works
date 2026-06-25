@@ -13,6 +13,9 @@
     />
 
     <style>
+      /* =========================
+         RESET
+      ========================= */
       * {
         margin: 0;
         padding: 0;
@@ -49,6 +52,12 @@
       :root {
         --content-max: 1600px;
         --content-wide: 1500px;
+        --content-mid: 1400px;
+
+        --dark: #111;
+        --gray: #3f3f3f;
+        --light-gray: #d8d8d8;
+
         --red: #e21b24;
         --green: #0f7f4f;
         --yellow: #f5b323;
@@ -56,6 +65,9 @@
         --point: #ffb400;
       }
 
+      /* =========================
+         COMMON
+      ========================= */
       .page {
         width: 100%;
         background: #111;
@@ -83,20 +95,19 @@
       }
 
       .big-title {
-        font-family: "Noto Sans KR", sans-serif;
-        font-size: clamp(54px, 5.4vw, 104px);
-        line-height: 1.12;
-        letter-spacing: -0.07em;
+        font-family: "Anton", "Noto Sans KR", sans-serif;
+        font-size: clamp(64px, 6.5vw, 132px);
+        line-height: 0.95;
+        letter-spacing: -0.05em;
         font-weight: 900;
       }
 
       .section-title {
-        font-family: "Noto Sans KR", sans-serif;
-        font-size: clamp(46px, 4.6vw, 82px);
-        line-height: 1.16;
-        letter-spacing: -0.07em;
+        font-family: "Anton", "Noto Sans KR", sans-serif;
+        font-size: clamp(52px, 5vw, 96px);
+        line-height: 1;
+        letter-spacing: -0.04em;
         font-weight: 900;
-        color: #fff;
       }
 
       .btn-primary {
@@ -117,6 +128,9 @@
         background: #ff222b;
       }
 
+      /* =========================
+         GNB
+      ========================= */
       .gnb {
         position: fixed;
         top: 0;
@@ -125,6 +139,7 @@
         height: 78px;
         z-index: 1000;
         background: rgba(20, 20, 20, 0.82);
+        -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
@@ -164,11 +179,15 @@
         opacity: 1;
       }
 
+      /* =========================
+         HERO
+      ========================= */
       .hero {
         min-height: 920px;
         padding-top: 78px;
         overflow: hidden;
         background: #111;
+        position: relative;
       }
 
       .hero-bg {
@@ -181,16 +200,17 @@
         opacity: 0.95;
       }
 
-      .hero-red-person {
-        position: absolute;
-        left: 35%;
-        bottom: 0;
-        width: min(1060px, 50vw);
-        transform: translateX(-20%);
-        z-index: 2;
-        filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.22));
-        pointer-events: none;
-      }
+.hero-red-person {
+  position: absolute;
+  left: 35%;
+  bottom: 0;
+  width: min(1060px, 50vw);
+  transform: translateX(-20%);
+  z-index: 2;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.22));
+  animation: none;
+  pointer-events: none;
+}
 
       .hero-content {
         min-height: 842px;
@@ -199,6 +219,7 @@
         justify-content: center;
         align-items: flex-start;
         padding-top: 60px;
+        position: relative;
         z-index: 3;
       }
 
@@ -207,6 +228,9 @@
         text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
       }
 
+      /* =========================
+         VISUAL WORK INTRO
+      ========================= */
       .visual-intro {
         min-height: 760px;
         background: #ddd;
@@ -281,7 +305,6 @@
         from {
           transform: rotate(-4deg) translateY(0);
         }
-
         to {
           transform: rotate(3deg) translateY(-14px);
         }
@@ -311,7 +334,6 @@
           opacity: 0;
           transform: translateY(20px);
         }
-
         to {
           opacity: 1;
           transform: translateY(0);
@@ -378,6 +400,9 @@
         visibility: hidden;
       }
 
+      /* =========================
+         WORKS - ARTWORK IMAGES ONLY
+      ========================= */
       .works {
         background: #444;
         padding: 110px 0 105px;
@@ -391,15 +416,10 @@
         gap: 24px;
       }
 
-      .works-copy {
-        max-width: 900px;
-      }
-
       .works-guide {
         font-size: 15px;
         color: #e5e5e5;
         opacity: 0.85;
-        padding-bottom: 8px;
       }
 
       .works-scroll {
@@ -409,6 +429,7 @@
         overflow-y: hidden;
         padding-bottom: 30px;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
       }
 
       .works-scroll::-webkit-scrollbar {
@@ -447,11 +468,15 @@
         background: #222;
       }
 
+      /* =========================
+         TOOLS
+      ========================= */
       .tools {
         min-height: 720px;
         background: #8a8a8a;
         overflow: hidden;
         padding: 100px 0;
+        position: relative;
       }
 
       .tools .inner {
@@ -460,6 +485,12 @@
         display: block;
       }
 
+      /*
+        손 이미지 크기/위치는 여기서 조정합니다.
+        width: 손 크기
+        left: 좌우 위치
+        top: 위아래 위치
+      */
       .hand-wrap {
         position: absolute;
         left: -60px;
@@ -484,21 +515,13 @@
         z-index: 2;
       }
 
-      .tools-copy {
+      .tools-title {
         position: absolute;
         top: 30px;
         right: 0;
-        text-align: right;
-        max-width: 760px;
-      }
-
-      .tools-title {
-        font-family: "Noto Sans KR", sans-serif;
-        font-size: clamp(46px, 4.6vw, 82px);
-        line-height: 1.16;
-        letter-spacing: -0.07em;
-        color: #fff;
-        font-weight: 900;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(56px, 5vw, 92px);
+        letter-spacing: -0.03em;
       }
 
       .tool-icon {
@@ -515,19 +538,22 @@
 
       .figma {
         left: 19%;
-        top: 190px;
+        top: 150px;
       }
 
       .photoshop {
         left: 52%;
-        top: 270px;
+        top: 230px;
       }
 
       .illustrator {
         left: 32%;
-        top: 420px;
+        top: 380px;
       }
 
+      /* =========================
+         ABOUT
+      ========================= */
       .about {
         min-height: 700px;
         background: #222;
@@ -536,16 +562,20 @@
 
       .about-bg {
         position: absolute;
-        inset: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
         background:
           linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.22)),
           url("images/about/eye-bg.jpg") center / cover no-repeat;
+        filter: none;
       }
 
       .eye-detail {
         position: absolute;
         left: 36%;
-        top: 49%;
+        top: 44%;
         width: 280px;
         transform: translate(-50%, -50%);
         z-index: 2;
@@ -557,7 +587,6 @@
           opacity: 0.75;
           transform: translate(-50%, -50%) scale(0.98);
         }
-
         to {
           opacity: 1;
           transform: translate(-50%, -50%) scale(1.04);
@@ -568,12 +597,10 @@
         margin-left: auto;
         width: 42%;
         min-height: 700px;
-        background: rgba(0, 0, 0, 0.35);
+        background: transparent;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-end;
-        text-align: right;
         padding: 80px 70px;
         position: relative;
         z-index: 3;
@@ -585,12 +612,10 @@
       }
 
       .about-panel h2 {
-        font-family: "Noto Sans KR", sans-serif;
-        font-size: clamp(46px, 4.6vw, 82px);
+        font-size: clamp(46px, 4vw, 78px);
         line-height: 1.16;
         letter-spacing: -0.07em;
         font-weight: 900;
-        color: #fff;
       }
 
       .about-panel p {
@@ -598,9 +623,11 @@
         font-size: 18px;
         line-height: 1.7;
         color: #f2f2f2;
-        max-width: 520px;
       }
 
+      /* =========================
+         CONTACT
+      ========================= */
       .contact {
         min-height: 680px;
         background: #111;
@@ -634,11 +661,10 @@
       }
 
       .contact h2 {
-        font-family: "Noto Sans KR", sans-serif;
-        font-size: clamp(50px, 5vw, 92px);
-        line-height: 1.16;
-        letter-spacing: -0.07em;
-        font-weight: 900;
+        font-family: "Anton", sans-serif;
+        font-size: clamp(58px, 6vw, 112px);
+        letter-spacing: -0.05em;
+        line-height: 0.95;
         max-width: 1180px;
       }
 
@@ -646,6 +672,7 @@
         margin-top: 34px;
         font-size: 18px;
         line-height: 1.9;
+        color: #fff;
       }
 
       .sns-icons {
@@ -667,6 +694,9 @@
         opacity: 1;
       }
 
+      /* =========================
+         BACK TO TOP BUTTON
+      ========================= */
       .top-button {
         position: fixed;
         right: 32px;
@@ -680,6 +710,7 @@
         font-family: "Anton", "Noto Sans KR", sans-serif;
         font-size: 24px;
         font-weight: 900;
+        line-height: 1;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -696,6 +727,9 @@
         transform: translateY(-2px);
       }
 
+      /* =========================
+         MODAL
+      ========================= */
       .modal {
         position: fixed;
         inset: 0;
@@ -785,6 +819,9 @@
         background: #ccc;
       }
 
+      /* =========================
+         RESPONSIVE
+      ========================= */
       @media (max-width: 1200px) {
         .about-panel {
           width: 48%;
@@ -872,6 +909,7 @@
         }
 
         .exclamation {
+          
           width: 150px;
           top: 80px;
         }
@@ -920,33 +958,9 @@
           padding-top: 280px;
         }
 
-        .tools-copy {
-          left: auto;
-          right: 0;
-          top: 280px;
-          max-width: 100%;
-          text-align: right;
-        }
-
-        .figma {
-          left: 10%;
-          top: 420px;
-        }
-
-        .photoshop {
-          left: 45%;
-          top: 440px;
-        }
-
-        .illustrator {
-          left: 25%;
-          top: 550px;
-        }
-
-        .eye-detail {
-          left: 50%;
-          top: 28%;
-          width: 190px;
+        .about-bg {
+          width: 100%;
+          height: 100%;
         }
 
         .about-panel {
@@ -954,19 +968,19 @@
           min-height: 620px;
           margin-left: 0;
           padding: 360px 30px 70px;
-          background: rgba(0, 0, 0, 0.35);
-          align-items: flex-end;
-          text-align: right;
+          background: transparent;
+        }
+
+        .eye-detail {
+          left: 50%;
+          top: 24%;
+          width: 190px;
         }
 
         .contact-person {
           right: 0;
           height: 420px;
           opacity: 0.85;
-        }
-
-        .contact h2 {
-          font-size: clamp(42px, 10vw, 68px);
         }
 
         .top-button {
@@ -996,10 +1010,13 @@
     </style>
   </head>
 
+
+  
   <body>
-    <audio id="introSound" src="audio/intro-sound.mp3" preload="auto"></audio>
+<audio id="introSound" src="audio/intro-sound.mp3" preload="auto"></audio>
 
     <div class="page">
+      <!-- GNB -->
       <header class="gnb">
         <div class="gnb-inner">
           <a href="#home" class="logo">PORTFOLIO</a>
@@ -1014,6 +1031,7 @@
         </div>
       </header>
 
+      <!-- HERO -->
       <section class="section hero" id="home">
         <div class="hero-bg"></div>
 
@@ -1033,6 +1051,7 @@
         </div>
       </section>
 
+      <!-- VISUAL INTRO -->
       <section class="section visual-intro">
         <div class="visual-intro-bg"></div>
 
@@ -1103,17 +1122,11 @@
         </div>
       </section>
 
+      <!-- WORKS -->
       <section class="section works" id="works">
         <div class="inner">
           <div class="works-head">
-            <div class="works-copy">
-              <p class="section-label">WORKS LIST</p>
-              <h2 class="section-title">
-                Fragments I Found,<br />
-                Works I Built.
-              </h2>
-            </div>
-
+            <h2 class="section-title">WORKS LIST</h2>
             <p class="works-guide">
               작품 이미지를 좌우로 스크롤해서 볼 수 있습니다.
             </p>
@@ -1165,6 +1178,7 @@
         </div>
       </section>
 
+      <!-- TOOLS -->
       <section class="section tools" id="tools">
         <div class="inner">
           <div class="hand-wrap">
@@ -1176,13 +1190,7 @@
           </div>
 
           <div class="tools-title-wrap">
-            <div class="tools-copy">
-              <p class="section-label">TOOLS</p>
-              <h2 class="tools-title">
-                Tools That Turn<br />
-                Noise into Form.
-              </h2>
-            </div>
+            <h2 class="tools-title">TOOLS</h2>
 
             <img
               src="images/tools/figma.svg"
@@ -1205,6 +1213,7 @@
         </div>
       </section>
 
+      <!-- ABOUT -->
       <section class="section about" id="about">
         <div class="about-bg"></div>
 
@@ -1230,6 +1239,7 @@
         </div>
       </section>
 
+      <!-- CONTACT -->
       <section class="section contact" id="contact">
         <div class="contact-bg"></div>
 
@@ -1255,12 +1265,14 @@
           </div>
         </div>
       </section>
-
+      <!-- TOP BUTTON -->
       <button class="top-button" id="topButton" type="button" aria-label="맨 위로 이동">
         <span>↑</span>
       </button>
+
     </div>
 
+    <!-- MODAL -->
     <div class="modal" id="workModal">
       <div class="modal-box">
         <button class="modal-close" id="modalClose">×</button>
@@ -1289,6 +1301,9 @@
     </div>
 
     <script>
+      /* =========================
+         WORK DATA
+      ========================= */
       const works = [
         {
           category: "Graphic / Poster Design",
@@ -1298,7 +1313,11 @@
           tools: "Photoshop, Illustrator",
           keyword: "Poster, Contrast, Message",
           color: "red",
-          images: ["images/works/work01-detail-01.jpg", "", ""],
+          images: [
+            "images/works/work01-detail-01.jpg",
+            "",
+            "",
+          ],
         },
         {
           category: "Branding / Package",
@@ -1344,6 +1363,9 @@
         },
       ];
 
+      /* =========================
+         IMAGE SETTING FUNCTION
+      ========================= */
       function setImage(imgElement, src) {
         if (src) {
           imgElement.src = src;
@@ -1354,6 +1376,9 @@
         }
       }
 
+      /* =========================
+         FLOATING CARD INTERACTION
+      ========================= */
       const people = document.querySelectorAll(".person");
       const floatingCard = document.getElementById("floatingCard");
       const floatingDot = document.getElementById("floatingDot");
@@ -1363,8 +1388,11 @@
       const floatingImg2 = document.getElementById("floatingImg2");
       const floatingImg3 = document.getElementById("floatingImg3");
 
+      let currentFloatingIndex = 0;
+
       function updateFloatingCard(index) {
         const work = works[index];
+        currentFloatingIndex = index;
 
         floatingCard.classList.remove("active");
 
@@ -1397,6 +1425,9 @@
         });
       });
 
+      /* =========================
+         MODAL
+      ========================= */
       const modal = document.getElementById("workModal");
       const modalClose = document.getElementById("modalClose");
 
@@ -1448,6 +1479,9 @@
         }
       });
 
+      /* =========================
+         BACK TO TOP BUTTON
+      ========================= */
       const topButton = document.getElementById("topButton");
 
       topButton.addEventListener("click", () => {
@@ -1457,6 +1491,9 @@
         });
       });
 
+      /* =========================
+         GNB SCROLL EFFECT
+      ========================= */
       const gnb = document.querySelector(".gnb");
 
       window.addEventListener("scroll", () => {
@@ -1467,27 +1504,30 @@
         }
       });
 
-      const introSound = document.getElementById("introSound");
-      let soundPlayed = false;
+      /* =========================
+   INTRO SOUND
+========================= */
+const introSound = document.getElementById("introSound");
+let soundPlayed = false;
 
-      function playIntroSound() {
-        if (soundPlayed) return;
+function playIntroSound() {
+  if (soundPlayed) return;
 
-        introSound.volume = 0.45;
+  introSound.volume = 0.45;
 
-        introSound
-          .play()
-          .then(() => {
-            soundPlayed = true;
-          })
-          .catch(() => {
-            // 브라우저가 자동 재생을 막은 경우, 다음 사용자 동작 때 다시 시도
-          });
-      }
+  introSound
+    .play()
+    .then(() => {
+      soundPlayed = true;
+    })
+    .catch(() => {
+      // 브라우저가 자동 재생을 막은 경우, 다음 사용자 동작 때 다시 시도
+    });
+}
 
-      window.addEventListener("click", playIntroSound);
-      window.addEventListener("scroll", playIntroSound);
-      window.addEventListener("keydown", playIntroSound);
+window.addEventListener("click", playIntroSound);
+window.addEventListener("scroll", playIntroSound);
+window.addEventListener("keydown", playIntroSound);
     </script>
   </body>
 </html>
