@@ -192,6 +192,17 @@
         pointer-events: none;
       }
 
+.hero-front-people {
+  position: absolute;
+  right: 20px;
+  bottom: -100px;
+  z-index: 2;
+  width: 1200px;
+  filter: grayscale(1) contrast(1.05) brightness(0.76)
+    drop-shadow(0 14px 22px rgba(0, 0, 0, 0.42));
+  pointer-events: none;
+}
+
       .hero-content {
         min-height: 842px;
         display: flex;
@@ -199,7 +210,7 @@
         justify-content: center;
         align-items: flex-start;
         padding-top: 60px;
-        z-index: 3;
+        z-index: 4;
       }
 
       .hero .big-title {
@@ -537,9 +548,7 @@
       .about-bg {
         position: absolute;
         inset: 0;
-        background:
-          linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.22)),
-          url("images/about/eye-bg.jpg") center / cover no-repeat;
+        background: url("images/about/eye-bg.jpg") center / cover no-repeat;
       }
 
       .eye-detail {
@@ -568,7 +577,7 @@
         margin-left: auto;
         width: 42%;
         min-height: 700px;
-        background: rgba(0, 0, 0, 0.35);
+        background: transparent;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -842,6 +851,13 @@
           transform: translateX(-10%);
         }
 
+        .hero-front-people {
+          width: 520px;
+          right: -170px;
+          bottom: 0;
+          opacity: 0.82;
+        }
+
         .visual-intro {
           min-height: 620px;
         }
@@ -954,7 +970,7 @@
           min-height: 620px;
           margin-left: 0;
           padding: 360px 30px 70px;
-          background: rgba(0, 0, 0, 0.35);
+          background: transparent;
           align-items: flex-end;
           text-align: right;
         }
@@ -1023,11 +1039,17 @@
           class="hero-red-person"
         />
 
+        <img
+          src="images/hero/hero-front-people.png"
+          alt="앞줄 관객 이미지"
+          class="hero-front-people"
+        />
+
         <div class="inner hero-content">
           <p class="section-label">INTERACTIVE PORTFOLIO WEBSITE</p>
           <h1 class="big-title">
-            Observe the Crowd,<br />
-            Find the Work.
+            군중 속에서 관찰하고,<br />
+            그 안의 메시지를 봅니다.
           </h1>
           <a href="#works" class="btn-primary">작품 탐색하기</a>
         </div>
@@ -1109,8 +1131,8 @@
             <div class="works-copy">
               <p class="section-label">WORKS LIST</p>
               <h2 class="section-title">
-                Fragments I Found,<br />
-                Works I Built.
+                내가 발견한 조각,<br />
+                내가 구축한 작업들.
               </h2>
             </div>
 
@@ -1179,8 +1201,8 @@
             <div class="tools-copy">
               <p class="section-label">TOOLS</p>
               <h2 class="tools-title">
-                Tools That Turn<br />
-                Noise into Form.
+                복잡한 감각을 <br />
+                만드는 도구의 능력치.
               </h2>
             </div>
 
@@ -1242,7 +1264,7 @@
         <div class="inner contact-content">
           <p class="section-label">CONTACT</p>
 
-          <h2>Let’s make a visual message.</h2>
+          <h2>함께 작업하고 싶다면,<br />메시지를 남겨주세요.</h2>
 
           <div class="contact-info">
             <p>Email. jiyeong260311@gmail.com</p>
