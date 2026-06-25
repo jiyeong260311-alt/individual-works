@@ -514,29 +514,67 @@
 
       .tool-icon {
         position: absolute;
-        width: 120px;
-        height: 120px;
+        width: 112px;
+        height: 112px;
         object-fit: contain;
         transition: 0.3s ease;
+        z-index: 3;
       }
 
       .tool-icon:hover {
         transform: scale(1.12) rotate(-4deg);
       }
 
+      .tool-badge {
+        position: absolute;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        color: #fff;
+        z-index: 3;
+        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .tool-badge .tool-name {
+        font-size: 16px;
+        font-weight: 700;
+        opacity: 0.9;
+      }
+
+      .tool-badge .tool-score {
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+      }
+
       .figma {
-        left: 19%;
-        top: 190px;
+        left: 8%;
+        top: 310px;
+      }
+
+      .figma-badge {
+        left: calc(8% + 136px);
+        top: 347px;
       }
 
       .photoshop {
-        left: 52%;
-        top: 270px;
+        left: 54%;
+        top: 345px;
+      }
+
+      .photoshop-badge {
+        left: calc(54% + 136px);
+        top: 382px;
       }
 
       .illustrator {
-        left: 32%;
-        top: 420px;
+        left: 34%;
+        top: 485px;
+      }
+
+      .illustrator-badge {
+        left: calc(34% + 136px);
+        top: 522px;
       }
 
       .about {
@@ -627,9 +665,9 @@
 
       .contact-person {
         position: absolute;
-        right: 18%;
-        bottom: 0;
-        height: 560px;
+        right: 4%;
+        bottom: -100px;
+        height: 700px;
         z-index: 2;
         filter: drop-shadow(0 18px 20px rgba(0, 0, 0, 0.4));
       }
@@ -944,19 +982,47 @@
           text-align: right;
         }
 
+        .tool-icon {
+          width: 96px;
+          height: 96px;
+        }
+
+        .tool-badge .tool-name {
+          font-size: 14px;
+        }
+
+        .tool-badge .tool-score {
+          font-size: 22px;
+        }
+
         .figma {
-          left: 10%;
-          top: 420px;
+          left: 4%;
+          top: 470px;
+        }
+
+        .figma-badge {
+          left: calc(4% + 112px);
+          top: 500px;
         }
 
         .photoshop {
-          left: 45%;
-          top: 440px;
+          left: 48%;
+          top: 485px;
+        }
+
+        .photoshop-badge {
+          left: calc(48% + 112px);
+          top: 515px;
         }
 
         .illustrator {
-          left: 25%;
-          top: 550px;
+          left: 28%;
+          top: 590px;
+        }
+
+        .illustrator-badge {
+          left: calc(28% + 112px);
+          top: 620px;
         }
 
         .eye-detail {
@@ -1201,8 +1267,8 @@
             <div class="tools-copy">
               <p class="section-label">TOOLS</p>
               <h2 class="tools-title">
-                복잡한 감각을 <br />
-                만드는 도구의 능력치.
+                사용 프로그램, <br />
+                도구들의 능력치.
               </h2>
             </div>
 
@@ -1211,18 +1277,30 @@
               alt="Figma"
               class="tool-icon figma"
             />
+            <div class="tool-badge figma-badge">
+              <span class="tool-name">Figma</span>
+              <strong class="tool-score">4/10</strong>
+            </div>
 
             <img
               src="images/tools/photoshop.svg"
               alt="Photoshop"
               class="tool-icon photoshop"
             />
+            <div class="tool-badge photoshop-badge">
+              <span class="tool-name">Photoshop</span>
+              <strong class="tool-score">5/10</strong>
+            </div>
 
             <img
               src="images/tools/illustrator.svg"
               alt="Illustrator"
               class="tool-icon illustrator"
             />
+            <div class="tool-badge illustrator-badge">
+              <span class="tool-name">Illustrator</span>
+              <strong class="tool-score">3/10</strong>
+            </div>
           </div>
         </div>
       </section>
